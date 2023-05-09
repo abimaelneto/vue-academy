@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+   
+    <div id="app">
+        <p>{{ message }}</p>
+        <button @click="update">Update</button>
+    </div>
+
+ 
+    <script >
+        const { createApp } = Vue
+
+        const msg1 = "Bye Vue"
+        const msg2 = "Hello Friend"
+
+
+        const messages = [ "Bye Vue", "Hello Friend", "Go Home" ]
+
+
+        const app = createApp({
+            data() {
+                return {
+                    index: 0,
+                    messages: [ "Bye Vue", "Hello Friend", "Go Home" ]
+                }
+            },
+            computed: {
+                message(){
+                    return this.messages[this.index]
+                }
+            },
+            methods: {
+                update(){
+                
+                    if(this.index === messages.length - 1) {
+                        this.index = 0
+                    } else {
+                        this.index++
+                    }
+
+                    // if(this.index === msg1) {
+                    //     this.index = msg2
+                    // } else {
+                    //     this.index = msg1
+                    // }
+                }
+            }   
+
+        }).mount("#app")
+        
+
+    </script>
+  
+</body>
+</html>
