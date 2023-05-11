@@ -12,9 +12,7 @@ import { RouterLink, RouterView } from "vue-router";
     </nav>
   </header>
 
-  <main>
-    <RouterView />
-  </main>
+  <RouterView />
 </template>
 
 <style scoped>
@@ -36,15 +34,6 @@ header {
 
   padding: 0 20px;
   padding-right: 40px;
-}
-
-main {
-  padding-top: 10vh;
-  background: lightgray;
-
-  height: 120vh;
-
-  /* overflow: auto; */
 }
 
 nav {
