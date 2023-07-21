@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     // o que eu quiser, na hora que o componente aparecer na tela
-    this.getPeople("https://swapi.dev/api/people/");
+    this.getPeople("https://swapi.dev/api/peple/");
   },
 };
 </script>

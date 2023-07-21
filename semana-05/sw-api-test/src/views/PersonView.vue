@@ -3,11 +3,14 @@ export default {
   data() {
     return {
       person: {},
+      loading: false,
     };
   },
   methods: {
     getPerson(url) {
+      this.loading = true;
       const promise = fetch(url);
+
       promise
         .then((res) => res.json())
         .then((data) => {
@@ -19,32 +22,46 @@ export default {
             Height: height,
             "Eye Color": eye_color,
           };
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     // async/await
     async getPerson2(url) {
-      const res = await fetch(url);
-      const data = await res.json();
-      console.log(data);
+      this.loading = true;
 
-      const { name, birth_year, height, eye_color } = data;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
 
-      this.person = {
-        Name: name,
-        "Birth Year": birth_year,
-        Height: height,
-        "Eye Color": eye_color,
-      };
+        const { name, birth_year, height, eye_color } = data;
+
+        this.person = {
+          Name: name,
+          "Birth Year": birth_year,
+          Height: height,
+          "Eye Color": eye_color,
+        };
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
   mounted() {
     const id = this.$route.params.id;
-    this.getPerson(`https://swapi.dev./api/people/${id}`);
+    this.getPerson2(`https://swapi.dev./api/people/${id}`);
   },
 };
 </script>
 
 <template>
+  {{ loading }}
   <table>
     <tr v-for="(value, label) in person" :key="label">
       <th>{{ label }}</th>
